@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Student{
+	int id;
+	char name[20];
+	int total;
+	struct Student *next;
+}Student; 
+
+int main(void){
+	Student *head = NULL;
+	while(1){
+		int stu_id,total;
+		Student *new_student = (Student*)malloc(sizeof(Student));
+		scanf(" %d",&stu_id);
+		if(stu_id<0)break;
+		scanf(" %d",&total);
+		new_student->id = stu_id;
+		new_student->total = total;
+		scanf(" %s",new_student->name);
+		new_student->next = head;
+		head = new_student;
+	}
+	Student *cur = head;
+	while(cur!=NULL){
+		printf("ID: %d Name: %s Total: %d\n",cur->id,cur->name,cur->total);
+		cur=cur->next;
+	}
+	return 0;
+}; 
