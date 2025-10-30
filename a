@@ -1,0 +1,32 @@
+create database `company`;
+ use `company`;
+ 
+
+ create table `Branch`(
+ `branch_id` int primary key,
+ `branch_name` varchar(20),
+ `mange_id` int
+ );
+ create table `Employee`(
+ `emp_id` INT primary key,
+ `name` varchar(20),
+ `birth_date` date,
+ `sex` varchar(1),
+ `salary` int,
+ `branch_id` int,
+ `sup_id` int,
+ FOREIGN KEY (branch_id) REFERENCES Branch(branch_id)
+ );
+
+ insert into `Branch` values(1,"研發",206);
+ insert into `Branch` values(2,"行政",207);
+ insert into `Branch` values(3,"資訊",208);
+ insert into `Employee` values(206,"小黃","1999-10-08","F",50000,1,NULL);
+ insert into `Employee` values(207,"小綠","1985-09-16","M",29000,2,206);
+ insert into `Employee` values(208,"小黑","2000-12-19","M",35000,3,206);
+ insert into `Employee` values(209,"小白","1997-01-22","F",39000,3,207);
+ insert into `Employee` values(210,"小蘭","1925-11-10","F",84000,1,207);
+
+ SELECT Employee.emp_id,Employee.`name`,Employee.salary,Employee.branch_id,Branch.branch_name
+FROM Employee
+INNER JOIN Branch ON Employee.emp_id = Branch.mange_id;
